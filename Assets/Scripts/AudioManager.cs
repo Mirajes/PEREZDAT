@@ -15,38 +15,44 @@ public class AudioManager : MonoBehaviour
     private static AudioManager _instance;
     public static AudioManager Instance => _instance;
 
-    private void Awake() {
-        if (_instance == null){
+    private void Awake()
+    {
+        if (_instance == null)
+        {
             _instance = this;
             DontDestroyOnLoad(_instance);
         }
-        else {
+        else
+        {
             Destroy(this.gameObject);
+            return;
         }
+
 
         _audioSource = GetComponent<AudioSource>();
         Init();
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         PlayClip += OnPlayClip;
     }
-private void OnDisable() {
-    PlayClip -= OnPlayClip;
-}
-    private void OnDestroy() {
-        _instance = null;
+    private void OnDisable()
+    {
+        PlayClip -= OnPlayClip;
     }
-
-    private void Init() {
+    private void Init()
+    {
         _soundsDict.Add("exp", Resources.Load<AudioClip>("Sound/explosion"));
     }
 
-    public void ChangeVolume(float volume) {
+    public void ChangeVolume(float volume)
+    {
         _audioSource.volume = volume;
     }
 
-    private void OnPlayClip(string clipName) {
+    private void OnPlayClip(string clipName)
+    {
         AudioClip clip = _soundsDict[clipName];
         _audioSource.PlayOneShot(clip);
     }

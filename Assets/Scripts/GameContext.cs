@@ -31,13 +31,9 @@ public class GameContext : MonoBehaviour
         }
         else {
             Destroy(this.gameObject);
+            return;
         }
     }
-
-    private void OnDestroy() {
-        _instance = null;
-    }
-
     private void OnEnable() {
         HighScoreChange += OnHighScoreChange;
         ScoreChange += OnScoreChange;
